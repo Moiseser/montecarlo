@@ -33,6 +33,9 @@ program Monte_Carlo
     integer :: accepts=0
     Double Precision, allocatable :: U_new(:)
     character*30 filename
+    real :: start_time, final_time, total_time
+
+    CALL CPU_TIME(start_time)
     !Initialize
 
     !Reads # of atoms,xyzfile, and number of Monte Carlo steps
@@ -110,6 +113,11 @@ program Monte_Carlo
 enddo
 T=T+.05
 enddo
+CALL CPU_TIME(final_time)
+total_time = final_time - start_time
+open (unit=90,file='info.out')
+write (90,*) 'Number of NMC steps : ' NMC
+write (90,*) 'Runtime:', total_time
   end program Monte_Carlo
      
      
